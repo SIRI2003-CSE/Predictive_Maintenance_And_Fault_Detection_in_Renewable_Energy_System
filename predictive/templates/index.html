@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Maintenance and Fault Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #127def;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .logout-button {
+            background-color: white;
+            color: #127def;
+            border: 1px solid #127def;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logout-button:hover {
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            width: 50%;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #127def;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0a5bb5;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e7f3ff;
+            border: 1px solid #b3d7ff;
+            border-radius: 4px;
+        }
+
+        .result h2 {
+            margin: 0;
+            color: #127def;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Predictive Maintenance and Fault Detection</h1>
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    </div>
+    <div class="container">
+        <form action="{{ url_for('predict') }}" method="post">
+            <label for="wind_speed">Wind Speed (m/s):</label>
+            <input type="number" step="any" id="wind_speed" name="wind_speed" required>
+
+            <label for="temperature">Temperature (°C):</label>
+            <input type="number" step="any" id="temperature" name="temperature" required>
+
+            <label for="solar_irradiance">Solar Irradiance (W/m²):</label>
+            <input type="number" step="any" id="solar_irradiance" name="solar_irradiance" required>
+
+            <label for="vibration_level">Vibration Level:</label>
+            <input type="number" step="any" id="vibration_level" name="vibration_level" required>
+
+            <label for="oil_temperature">Oil Temperature (°C):</label>
+            <input type="number" step="any" id="oil_temperature" name="oil_temperature" required>
+
+            <label for="maintenance_flag">Maintenance Flag (0 or 1):</label>
+            <input type="number" id="maintenance_flag" name="maintenance_flag" required>
+
+            <label for="fault_flag">Fault Flag (0 or 1):</label>
+            <input type="number" id="fault_flag" name="fault_flag" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if result %}
+            <div class="result">
+                <h2>{{ result }}</h2>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
